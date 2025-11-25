@@ -1,4 +1,3 @@
-from torch import numel
 from predict_and_detect import predict_and_detect
 from take_photo import get_photo
 from ultralytics import YOLO

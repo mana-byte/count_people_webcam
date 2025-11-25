@@ -1,0 +1,11 @@
+# Consolidated Python Dependencies
+# Dependencies from flake.nix
+# numpy
+# pillow
+# torch
+# torchvision
+# tqdm
+opencv-python-headless
+
+# Dependencies from virtual environment
+ultralytics==8.3.232
