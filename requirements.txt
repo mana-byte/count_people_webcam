@@ -1,11 +1,5 @@
-# Consolidated Python Dependencies
-# Dependencies from flake.nix
-# numpy
-# pillow
-# torch
-# torchvision
-# tqdm
-opencv-python-headless
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-# Dependencies from virtual environment
-ultralytics==8.3.232
+torch
+torchvision
+ultralytics
