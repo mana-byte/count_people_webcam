@@ -64,6 +64,11 @@
           libGL.dev
         ];
 
+        env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+          pkgs.stdenv.cc.cc.lib
+          pkgs.libz
+        ];
+
         shellHook = ''
 
           if [ ! -d .venv ]; then
