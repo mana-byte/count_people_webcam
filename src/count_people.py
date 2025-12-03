@@ -1,8 +1,10 @@
 from predict_and_detect import predict_and_detect
 from take_photo import get_photo
 from ultralytics import YOLO
+from cv2 import imwrite
 
 MODEL = YOLO("yolo11n.pt")
+
 
 def count_people_in_image(image):
     """
@@ -11,8 +13,8 @@ def count_people_in_image(image):
     Args:
         image: cv2 image
     """
-    _, number_of_people = predict_and_detect(MODEL, image, classes=[0])
-    return number_of_people
+    result_img, number_of_people = predict_and_detect(MODEL, image, classes=[0])
+    return (result_img, number_of_people)
 
 
 def count_people():
@@ -20,9 +22,19 @@ def count_people():
     Description: Captures an image from the camera and counts the number of people in it
     """
     image = get_photo()
-    return count_people_in_image(image)
+    return count_people_in_image(image)[1]
+
+
+def count_people_and_save():
+    """
+    Description: Captures an image from the camera and counts the number of people in it and saves it
+    """
+    image = get_photo()
+    result_img, number_of_people = count_people_in_image(image)
+    _ = imwrite("img/captured_image.jpg", result_img)
+    return number_of_people
 
 
 if __name__ == "__main__":
-    num_people = count_people()
+    num_people = count_people_and_save()
     print(f"Number of people detected: {num_people}")

@@ -35,16 +35,8 @@
 
       pythonWithPackages = python.withPackages (ps:
         with ps; [
-          numpy
-          pillow
           pip
-
-          torch-bin
-          torchvision-bin
-
           opencv-python-headless
-          # for ultralytics
-          tqdm
         ]);
     in {
       devShells.default = pkgs.mkShell {
@@ -52,16 +44,6 @@
           python312Packages.python-lsp-server
           black
           pythonWithPackages
-
-          # For CUDA support if you already have it remove these two lines
-          # cudaPackages.cudatoolkit
-          # cudaPackages.cudnn
-
-          pkg-config
-          # ffmpeg
-
-          gtk2.dev
-          libGL.dev
         ];
 
         env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
@@ -76,6 +58,7 @@
             ${python.interpreter} -m venv .venv
             source .venv/bin/activate
             pip install --upgrade pip
+            pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
             pip install ultralytics
           else
             source .venv/bin/activate
