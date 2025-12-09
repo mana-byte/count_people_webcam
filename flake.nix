@@ -36,7 +36,12 @@
       pythonWithPackages = python.withPackages (ps:
         with ps; [
           pip
-          
+          (opencv4.override {
+            enableGtk2 = true;
+            # enableContrib = true;
+            # gtk2 = pkgs.gtk2.dev;
+          })
+
         ]);
     in {
       devShells.default = pkgs.mkShell {
@@ -60,7 +65,7 @@
             source .venv/bin/activate
             pip install --upgrade pip
             pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-            pip install ultralytics opencv-python
+            pip install ultralytics 
           else
             source .venv/bin/activate
           fi
