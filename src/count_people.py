@@ -16,6 +16,18 @@ def count_people_in_image(image):
     result_img, number_of_people = predict_and_detect(MODEL, image, classes=[0])
     return (result_img, number_of_people)
 
+def count_people_in_image_path(path):
+    """
+    Description: Given an image counts the number of people in it
+
+    Args:
+        path: string
+    """
+    image = cv2.imread(path)
+    result_img, number_of_people = predict_and_detect(MODEL, image, classes=[0])
+    cv2.imwrite("img/processed_image.jpg", result_img)
+    return (result_img, number_of_people)
+
 
 def count_people():
     """
