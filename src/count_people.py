@@ -35,6 +35,35 @@ def count_people_and_save():
     return number_of_people
 
 
+def live_video():
+    """
+    Description: Captures live video from the camera and counts the number of people in it
+    """
+    import cv2
+
+    cap = cv2.VideoCapture(0)
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        result_img, number_of_people = count_people_in_image(frame)
+        cv2.putText(
+            result_img,
+            f"People Count: {number_of_people}",
+            (10, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
+            (0, 255, 0),
+            2,
+        )
+        cv2.imshow("Live Video - Press Q to Quit", result_img)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+
+
 if __name__ == "__main__":
-    num_people = count_people_and_save()
-    print(f"Number of people detected: {num_people}")
+    # num_people = count_people_and_save()
+    # print(f"Number of people detected: {num_people}")
+    live_video()

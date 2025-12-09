@@ -36,7 +36,7 @@
       pythonWithPackages = python.withPackages (ps:
         with ps; [
           pip
-          opencv-python-headless
+          
         ]);
     in {
       devShells.default = pkgs.mkShell {
@@ -49,6 +49,7 @@
         env.LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
           pkgs.stdenv.cc.cc.lib
           pkgs.libz
+          pkgs.libGL
         ];
 
         shellHook = ''
@@ -59,7 +60,7 @@
             source .venv/bin/activate
             pip install --upgrade pip
             pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-            pip install ultralytics
+            pip install ultralytics opencv-python
           else
             source .venv/bin/activate
           fi
