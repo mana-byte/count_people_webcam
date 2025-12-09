@@ -1,7 +1,7 @@
 from predict_and_detect import predict_and_detect
 from take_photo import get_photo
 from ultralytics import YOLO
-from cv2 import imwrite
+from cv2 import imwrite, imread
 
 MODEL = YOLO("yolo11n.pt")
 
@@ -23,9 +23,9 @@ def count_people_in_image_path(path):
     Args:
         path: string
     """
-    image = cv2.imread(path)
+    image = imread(path)
     result_img, number_of_people = predict_and_detect(MODEL, image, classes=[0])
-    cv2.imwrite("img/processed_image.jpg", result_img)
+    imwrite("img/processed_image.jpg", result_img)
     return (result_img, number_of_people)
 
 
